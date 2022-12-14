@@ -92,6 +92,20 @@ public class Flights extends javax.swing.JFrame {
         FDestination = new javax.swing.JComboBox<>();
         FSource = new javax.swing.JComboBox<>();
         FCode = new javax.swing.JTextField();
+        TicketsPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        DeleteBut1 = new com.k33ptoo.components.KButton();
+        AddBut1 = new com.k33ptoo.components.KButton();
+        EditBut1 = new com.k33ptoo.components.KButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        FTable1 = new javax.swing.JTable();
+        FCode1 = new javax.swing.JTextField();
+        FCode2 = new javax.swing.JTextField();
+        FSource1 = new javax.swing.JComboBox<>();
+        FCode3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -299,6 +313,134 @@ public class Flights extends javax.swing.JFrame {
 
         OptionsPanels.addTab("tab1", FlightsPanel);
 
+        TicketsPanel.setBackground(new java.awt.Color(27, 36, 48));
+        TicketsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Phone ");
+        TicketsPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 30, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Passenger Name");
+        TicketsPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Passport Number");
+        TicketsPanel.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Flight");
+        TicketsPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, -1, -1));
+
+        DeleteBut1.setBackground(new java.awt.Color(75, 91, 100));
+        DeleteBut1.setText("Cancel");
+        DeleteBut1.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
+        DeleteBut1.setkBackGroundColor(new java.awt.Color(255, 255, 255));
+        DeleteBut1.setkBorderRadius(50);
+        DeleteBut1.setkEndColor(new java.awt.Color(75, 91, 100));
+        DeleteBut1.setkHoverEndColor(new java.awt.Color(22, 33, 62));
+        DeleteBut1.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        DeleteBut1.setkHoverStartColor(new java.awt.Color(22, 33, 62));
+        DeleteBut1.setkSelectedColor(new java.awt.Color(75, 91, 100));
+        DeleteBut1.setkStartColor(new java.awt.Color(75, 91, 100));
+        DeleteBut1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBut1ActionPerformed(evt);
+            }
+        });
+        TicketsPanel.add(DeleteBut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, -1, -1));
+
+        AddBut1.setBackground(new java.awt.Color(75, 91, 100));
+        AddBut1.setText("Pick");
+        AddBut1.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
+        AddBut1.setkBackGroundColor(new java.awt.Color(255, 255, 255));
+        AddBut1.setkBorderRadius(50);
+        AddBut1.setkEndColor(new java.awt.Color(75, 91, 100));
+        AddBut1.setkHoverEndColor(new java.awt.Color(22, 33, 62));
+        AddBut1.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        AddBut1.setkHoverStartColor(new java.awt.Color(22, 33, 62));
+        AddBut1.setkSelectedColor(new java.awt.Color(75, 91, 100));
+        AddBut1.setkStartColor(new java.awt.Color(75, 91, 100));
+        AddBut1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AddBut1MouseClicked(evt);
+            }
+        });
+        AddBut1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBut1ActionPerformed(evt);
+            }
+        });
+        TicketsPanel.add(AddBut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, -1, -1));
+
+        EditBut1.setBackground(new java.awt.Color(75, 91, 100));
+        EditBut1.setText("EDIT");
+        EditBut1.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
+        EditBut1.setkBackGroundColor(new java.awt.Color(255, 255, 255));
+        EditBut1.setkBorderRadius(50);
+        EditBut1.setkEndColor(new java.awt.Color(75, 91, 100));
+        EditBut1.setkHoverEndColor(new java.awt.Color(22, 33, 62));
+        EditBut1.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        EditBut1.setkHoverStartColor(new java.awt.Color(22, 33, 62));
+        EditBut1.setkSelectedColor(new java.awt.Color(75, 91, 100));
+        EditBut1.setkStartColor(new java.awt.Color(75, 91, 100));
+        EditBut1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditBut1ActionPerformed(evt);
+            }
+        });
+        TicketsPanel.add(EditBut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
+
+        FTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        FTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        FTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(FTable1);
+
+        TicketsPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 1030, 460));
+
+        FCode1.setBackground(new java.awt.Color(204, 204, 204));
+        FCode1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FCode1.setForeground(new java.awt.Color(22, 33, 62));
+        FCode1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        TicketsPanel.add(FCode1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, 200, 30));
+
+        FCode2.setBackground(new java.awt.Color(204, 204, 204));
+        FCode2.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FCode2.setForeground(new java.awt.Color(22, 33, 62));
+        FCode2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        TicketsPanel.add(FCode2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 320, 30));
+
+        FSource1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FSource1.setForeground(new java.awt.Color(22, 33, 62));
+        FSource1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        TicketsPanel.add(FSource1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, -1, 30));
+
+        FCode3.setBackground(new java.awt.Color(204, 204, 204));
+        FCode3.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FCode3.setForeground(new java.awt.Color(22, 33, 62));
+        FCode3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        TicketsPanel.add(FCode3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 160, 30));
+
+        OptionsPanels.addTab("tab1", TicketsPanel);
+
         MainPanel.add(OptionsPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 1050, 760));
         OptionsPanels.getAccessibleContext().setAccessibleName("");
 
@@ -406,7 +548,28 @@ public class Flights extends javax.swing.JFrame {
     private void TicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TicketsMouseClicked
          setColor(Tickets);
            resetColor(ManageFlights);
+            OptionsPanels.setSelectedIndex(1);
     }//GEN-LAST:event_TicketsMouseClicked
+
+    private void DeleteBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBut1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBut1ActionPerformed
+
+    private void AddBut1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBut1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddBut1MouseClicked
+
+    private void AddBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBut1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddBut1ActionPerformed
+
+    private void EditBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBut1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditBut1ActionPerformed
+
+    private void FTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -445,14 +608,22 @@ public class Flights extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.k33ptoo.components.KButton AddBut;
+    private com.k33ptoo.components.KButton AddBut1;
     private com.k33ptoo.components.KButton DeleteBut;
+    private com.k33ptoo.components.KButton DeleteBut1;
     private com.k33ptoo.components.KButton EditBut;
+    private com.k33ptoo.components.KButton EditBut1;
     private javax.swing.JTextField FCode;
+    private javax.swing.JTextField FCode1;
+    private javax.swing.JTextField FCode2;
+    private javax.swing.JTextField FCode3;
     private com.toedter.calendar.JDateChooser FDate;
     private javax.swing.JComboBox<String> FDestination;
     private javax.swing.JTextField FSeats;
     private javax.swing.JComboBox<String> FSource;
+    private javax.swing.JComboBox<String> FSource1;
     private javax.swing.JTable FTable;
+    private javax.swing.JTable FTable1;
     private javax.swing.JPanel FlightsPanel;
     private javax.swing.JPanel HeadPanel;
     private javax.swing.JPanel MainPanel;
@@ -460,18 +631,24 @@ public class Flights extends javax.swing.JFrame {
     private javax.swing.JTabbedPane OptionsPanels;
     private javax.swing.JPanel SidePanel;
     private javax.swing.JPanel Tickets;
+    private javax.swing.JPanel TicketsPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

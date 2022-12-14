@@ -45,8 +45,10 @@ public class LogIn extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        kGradientPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         kGradientPanel1.setkEndColor(new java.awt.Color(22, 33, 62));
         kGradientPanel1.setkGradientFocus(200);
         kGradientPanel1.setkStartColor(new java.awt.Color(27, 36, 48));
@@ -144,7 +146,7 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_LogInButMouseClicked
 
     private void ExitBut1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBut1MouseClicked
-        // TODO add your handling code here:
+       System.exit(0);
     }//GEN-LAST:event_ExitBut1MouseClicked
 
     /**
