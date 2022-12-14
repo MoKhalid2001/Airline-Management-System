@@ -39,9 +39,9 @@ public class LogIn extends javax.swing.JFrame {
         Password = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         LogInBut = new com.k33ptoo.components.KButton();
-        ExitBut = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        ExitBut1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -92,34 +92,30 @@ public class LogIn extends javax.swing.JFrame {
         });
         kGradientPanel1.add(LogInBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, -1, -1));
 
-        ExitBut.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        ExitBut.setForeground(new java.awt.Color(255, 255, 255));
-        ExitBut.setText("X");
-        ExitBut.addMouseListener(new java.awt.event.MouseAdapter() {
+        ExitBut1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        ExitBut1.setForeground(new java.awt.Color(255, 255, 255));
+        ExitBut1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/airline/management/system/Images/icons8-close-window-48.png"))); // NOI18N
+        ExitBut1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ExitButMouseClicked(evt);
+                ExitBut1MouseClicked(evt);
             }
         });
-        kGradientPanel1.add(ExitBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("username");
-        kGradientPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
+        kGradientPanel1.add(ExitBut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/airline/management/system/icons8-male-user-50.png"))); // NOI18N
-        kGradientPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 70, 70));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/airline/management/system/Images/icons8-male-user-50.png"))); // NOI18N
+        kGradientPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("username");
+        kGradientPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, -1, -1));
 
         getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 678, 486));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ExitButMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitButMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_ExitButMouseClicked
 
     private void LogInButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogInButActionPerformed
        
@@ -146,6 +142,10 @@ public class LogIn extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_LogInButMouseClicked
+
+    private void ExitBut1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBut1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExitBut1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -183,13 +183,13 @@ public class LogIn extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ExitBut;
+    private javax.swing.JLabel ExitBut1;
     private com.k33ptoo.components.KButton LogInBut;
     private javax.swing.JPasswordField Password;
     private javax.swing.JTextField Username;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private keeptoo.KGradientPanel kGradientPanel1;
     // End of variables declaration//GEN-END:variables
 }

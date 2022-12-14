@@ -4,9 +4,11 @@
  */
 package airline.management.system;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import java.util.*;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 //import org.apache.commons.dbutils.DbUtils;
 /**
@@ -46,6 +48,12 @@ public class Flights extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+    private void setColor(JPanel panell){
+        panell.setBackground(new Color(39, 60, 117));
+    }
+    private void resetColor(JPanel panell){
+        panell.setBackground(new Color(52,73,94));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,92 +63,136 @@ public class Flights extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        MainPanel = new javax.swing.JPanel();
+        SidePanel = new javax.swing.JPanel();
+        ManageFlights = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        Tickets = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        FSeats = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel12 = new javax.swing.JLabel();
+        HeadPanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        OptionsPanels = new javax.swing.JTabbedPane();
+        FlightsPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        FDate = new com.toedter.calendar.JDateChooser();
-        FDestination = new javax.swing.JComboBox<>();
-        FCode = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        FSource = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         DeleteBut = new com.k33ptoo.components.KButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        FTable = new javax.swing.JTable();
         AddBut = new com.k33ptoo.components.KButton();
         EditBut = new com.k33ptoo.components.KButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        FTable = new javax.swing.JTable();
+        FSeats = new javax.swing.JTextField();
+        FDate = new com.toedter.calendar.JDateChooser();
+        FDestination = new javax.swing.JComboBox<>();
+        FSource = new javax.swing.JComboBox<>();
+        FCode = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setUndecorated(true);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(22, 33, 62));
-        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.setMinimumSize(new java.awt.Dimension(100, 100));
-        jPanel3.setPreferredSize(new java.awt.Dimension(400, 80));
+        SidePanel.setBackground(new java.awt.Color(64, 115, 158));
+        SidePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Waree", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel1.setText("Manage Flights");
-        jPanel3.add(jLabel1);
+        ManageFlights.setBackground(new java.awt.Color(52, 73, 94));
+        ManageFlights.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageFlightsMouseClicked(evt);
+            }
+        });
+        ManageFlights.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/airline/management/system/Images/icons8-airplane-take-off-50.png"))); // NOI18N
+        jLabel2.setPreferredSize(new java.awt.Dimension(50, 70));
+        ManageFlights.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 67));
 
-        jPanel2.setBackground(new java.awt.Color(27, 36, 48));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel11.setFont(new java.awt.Font("Noto Serif CJK TC", 0, 30)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Manage Flights");
+        ManageFlights.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
-        FSeats.setBackground(new java.awt.Color(204, 204, 204));
-        FSeats.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        FSeats.setForeground(new java.awt.Color(22, 33, 62));
-        FSeats.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(FSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 50, 170, 40));
+        SidePanel.add(ManageFlights, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 320, 60));
+
+        Tickets.setBackground(new java.awt.Color(52, 73, 94));
+        Tickets.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TicketsMouseClicked(evt);
+            }
+        });
+        Tickets.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/airline/management/system/Images/icons8-tickets-50.png"))); // NOI18N
+        jLabel4.setPreferredSize(new java.awt.Dimension(50, 70));
+        Tickets.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 67));
+
+        jLabel1.setFont(new java.awt.Font("Noto Serif CJK TC", 0, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Tickets");
+        Tickets.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
+
+        SidePanel.add(Tickets, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 320, 60));
+        SidePanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 290, -1));
+
+        jLabel12.setFont(new java.awt.Font("Noto Serif CJK TC", 1, 30)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(27, 36, 48));
+        jLabel12.setText("Airline System");
+        SidePanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+
+        MainPanel.add(SidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 780));
+
+        HeadPanel.setBackground(new java.awt.Color(52, 73, 94));
+        HeadPanel.setForeground(new java.awt.Color(255, 255, 255));
+        HeadPanel.setMinimumSize(new java.awt.Dimension(100, 100));
+        HeadPanel.setPreferredSize(new java.awt.Dimension(400, 80));
+        HeadPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Noto Serif CJK TC", 1, 30)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/airline/management/system/Images/icons8-close-window-48.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        HeadPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 8, -1, -1));
+
+        MainPanel.add(HeadPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 1050, 60));
+
+        FlightsPanel.setBackground(new java.awt.Color(27, 36, 48));
+        FlightsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Seats");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, -1, -1));
-        jPanel2.add(FDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 140, 40));
-
-        FDestination.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        FDestination.setForeground(new java.awt.Color(22, 33, 62));
-        FDestination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aswan", "Luxor", "Alexandria", "Cairo" }));
-        jPanel2.add(FDestination, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 140, 40));
-
-        FCode.setBackground(new java.awt.Color(204, 204, 204));
-        FCode.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        FCode.setForeground(new java.awt.Color(22, 33, 62));
-        FCode.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.add(FCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 170, 40));
+        FlightsPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 40, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Flight Code");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
-
-        FSource.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        FSource.setForeground(new java.awt.Color(22, 33, 62));
-        FSource.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aswan", "Luxor", "Alexandria", "Cairo" }));
-        jPanel2.add(FSource, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 140, 40));
+        FlightsPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Source");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
+        FlightsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Destination");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, -1));
+        FlightsPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Takeof Date");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, -1));
+        FlightsPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 40, -1, -1));
 
         DeleteBut.setBackground(new java.awt.Color(75, 91, 100));
         DeleteBut.setText("DELETE");
@@ -158,27 +210,7 @@ public class Flights extends javax.swing.JFrame {
                 DeleteButActionPerformed(evt);
             }
         });
-        jPanel2.add(DeleteBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, -1, -1));
-
-        FTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        FTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FTableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(FTable);
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 1110, -1));
+        FlightsPanel.add(DeleteBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 150, -1, -1));
 
         AddBut.setBackground(new java.awt.Color(75, 91, 100));
         AddBut.setText("ADD");
@@ -201,7 +233,7 @@ public class Flights extends javax.swing.JFrame {
                 AddButActionPerformed(evt);
             }
         });
-        jPanel2.add(AddBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
+        FlightsPanel.add(AddBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, -1));
 
         EditBut.setBackground(new java.awt.Color(75, 91, 100));
         EditBut.setText("EDIT");
@@ -219,11 +251,58 @@ public class Flights extends javax.swing.JFrame {
                 EditButActionPerformed(evt);
             }
         });
-        jPanel2.add(EditBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, -1, -1));
+        FlightsPanel.add(EditBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+        FTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        FTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        FTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(FTable);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        FlightsPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 1030, 460));
+
+        FSeats.setBackground(new java.awt.Color(204, 204, 204));
+        FSeats.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FSeats.setForeground(new java.awt.Color(22, 33, 62));
+        FSeats.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        FlightsPanel.add(FSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 80, 150, 30));
+        FlightsPanel.add(FDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 80, 150, 30));
+
+        FDestination.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FDestination.setForeground(new java.awt.Color(22, 33, 62));
+        FDestination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aswan", "Luxor", "Alexandria", "Cairo" }));
+        FlightsPanel.add(FDestination, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, -1, 30));
+
+        FSource.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FSource.setForeground(new java.awt.Color(22, 33, 62));
+        FSource.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aswan", "Luxor", "Alexandria", "Cairo" }));
+        FlightsPanel.add(FSource, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, 30));
+
+        FCode.setBackground(new java.awt.Color(204, 204, 204));
+        FCode.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FCode.setForeground(new java.awt.Color(22, 33, 62));
+        FCode.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        FlightsPanel.add(FCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 150, 30));
+
+        OptionsPanels.addTab("tab1", FlightsPanel);
+
+        MainPanel.add(OptionsPanels, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 1050, 760));
+        OptionsPanels.getAccessibleContext().setAccessibleName("");
+
+        getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -313,6 +392,22 @@ public class Flights extends javax.swing.JFrame {
      
     }//GEN-LAST:event_FTableMouseClicked
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void ManageFlightsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManageFlightsMouseClicked
+           setColor(ManageFlights);
+           resetColor(Tickets);
+           OptionsPanels.setSelectedIndex(0);
+           
+    }//GEN-LAST:event_ManageFlightsMouseClicked
+
+    private void TicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TicketsMouseClicked
+         setColor(Tickets);
+           resetColor(ManageFlights);
+    }//GEN-LAST:event_TicketsMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -358,15 +453,25 @@ public class Flights extends javax.swing.JFrame {
     private javax.swing.JTextField FSeats;
     private javax.swing.JComboBox<String> FSource;
     private javax.swing.JTable FTable;
+    private javax.swing.JPanel FlightsPanel;
+    private javax.swing.JPanel HeadPanel;
+    private javax.swing.JPanel MainPanel;
+    private javax.swing.JPanel ManageFlights;
+    private javax.swing.JTabbedPane OptionsPanels;
+    private javax.swing.JPanel SidePanel;
+    private javax.swing.JPanel Tickets;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

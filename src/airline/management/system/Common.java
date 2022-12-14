@@ -14,4 +14,6 @@ public class Common {
    public static String DBURL = "jdbc:mysql://localhost:3306/AirlineSystem";
     public static String username = "root";
      public static Connection Con = null;
+     
+     
 }
