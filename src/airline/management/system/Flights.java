@@ -20,7 +20,8 @@ public class Flights extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet Rs,Rs1 = null;
     Statement st,st1 = null;
-    String selected = "";
+    String Flightselected = "";
+    String Passengerselected = "";
     
     /** 
      * Creates new form Flights
@@ -28,16 +29,28 @@ public class Flights extends javax.swing.JFrame {
     public Flights() {
         initComponents();
         DisplayFlights();
+        DisplayPassengers();
+        GetFlightsCodes();
     }
-    private boolean MissingData(){
+    private boolean MissingFlightData(){
         if (FCode.getText().isEmpty() || FSeats.getText().isEmpty() || FSource.getSelectedIndex() == -1 || FDestination.getSelectedIndex() == -1)
+            return true;
+        if( FSource.getSelectedIndex() == FDestination.getSelectedIndex()) return true;
+        return false;
+    }
+    private boolean MissingPassengerData(){
+        if (PassName.getText().isEmpty() || PassportNum.getText().isEmpty() || FlightCodeChoices.getSelectedIndex() == -1 || PhoneNumber.getText().isEmpty())
             return true;
         return false;
     }
-    private void Clear(){
+    private void FlightsClear(){
         FCode.setText("");
         FSeats.setText("");
-        
+    }
+    private void PassengersClear(){
+        PassName.setText("");
+        PassportNum.setText("");
+         PhoneNumber.setText("");
     }
     private void DisplayFlights(){
         try {
@@ -48,6 +61,30 @@ public class Flights extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+     private void DisplayPassengers(){
+        try {
+            Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
+            st = Con.createStatement();
+            Rs = st.executeQuery("select * from Passengers");
+            PassTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch (Exception e) {
+        }
+    }
+     private void GetFlightsCodes(){
+          try {
+            Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
+            st = Con.createStatement();
+            Rs = st.executeQuery("select * from Flights");
+            FlightCodeChoices.removeAllItems();
+             while(Rs.next()){
+                String FlightCd = Rs.getString("FCode");
+                FlightCodeChoices.addItem(FlightCd);
+                
+            }
+        } catch (Exception e) {
+        }
+           
+     }
     private void setColor(JPanel panell){
         panell.setBackground(new Color(39, 60, 117));
     }
@@ -97,15 +134,15 @@ public class Flights extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        DeleteBut1 = new com.k33ptoo.components.KButton();
-        AddBut1 = new com.k33ptoo.components.KButton();
-        EditBut1 = new com.k33ptoo.components.KButton();
+        EditPassBut = new com.k33ptoo.components.KButton();
+        PickBut = new com.k33ptoo.components.KButton();
+        PassDeleteBut = new com.k33ptoo.components.KButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        FTable1 = new javax.swing.JTable();
-        FCode1 = new javax.swing.JTextField();
-        FCode2 = new javax.swing.JTextField();
-        FSource1 = new javax.swing.JComboBox<>();
-        FCode3 = new javax.swing.JTextField();
+        PassTable = new javax.swing.JTable();
+        PhoneNumber = new javax.swing.JTextField();
+        PassName = new javax.swing.JTextField();
+        FlightCodeChoices = new javax.swing.JComboBox<>();
+        PassportNum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -336,67 +373,67 @@ public class Flights extends javax.swing.JFrame {
         jLabel16.setText("Flight");
         TicketsPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, -1, -1));
 
-        DeleteBut1.setBackground(new java.awt.Color(75, 91, 100));
-        DeleteBut1.setText("Cancel");
-        DeleteBut1.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
-        DeleteBut1.setkBackGroundColor(new java.awt.Color(255, 255, 255));
-        DeleteBut1.setkBorderRadius(50);
-        DeleteBut1.setkEndColor(new java.awt.Color(75, 91, 100));
-        DeleteBut1.setkHoverEndColor(new java.awt.Color(22, 33, 62));
-        DeleteBut1.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        DeleteBut1.setkHoverStartColor(new java.awt.Color(22, 33, 62));
-        DeleteBut1.setkSelectedColor(new java.awt.Color(75, 91, 100));
-        DeleteBut1.setkStartColor(new java.awt.Color(75, 91, 100));
-        DeleteBut1.addActionListener(new java.awt.event.ActionListener() {
+        EditPassBut.setBackground(new java.awt.Color(75, 91, 100));
+        EditPassBut.setText("EDIT");
+        EditPassBut.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
+        EditPassBut.setkBackGroundColor(new java.awt.Color(255, 255, 255));
+        EditPassBut.setkBorderRadius(50);
+        EditPassBut.setkEndColor(new java.awt.Color(75, 91, 100));
+        EditPassBut.setkHoverEndColor(new java.awt.Color(22, 33, 62));
+        EditPassBut.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        EditPassBut.setkHoverStartColor(new java.awt.Color(22, 33, 62));
+        EditPassBut.setkSelectedColor(new java.awt.Color(75, 91, 100));
+        EditPassBut.setkStartColor(new java.awt.Color(75, 91, 100));
+        EditPassBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteBut1ActionPerformed(evt);
+                EditPassButActionPerformed(evt);
             }
         });
-        TicketsPanel.add(DeleteBut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, -1, -1));
+        TicketsPanel.add(EditPassBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 150, -1, -1));
 
-        AddBut1.setBackground(new java.awt.Color(75, 91, 100));
-        AddBut1.setText("Pick");
-        AddBut1.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
-        AddBut1.setkBackGroundColor(new java.awt.Color(255, 255, 255));
-        AddBut1.setkBorderRadius(50);
-        AddBut1.setkEndColor(new java.awt.Color(75, 91, 100));
-        AddBut1.setkHoverEndColor(new java.awt.Color(22, 33, 62));
-        AddBut1.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        AddBut1.setkHoverStartColor(new java.awt.Color(22, 33, 62));
-        AddBut1.setkSelectedColor(new java.awt.Color(75, 91, 100));
-        AddBut1.setkStartColor(new java.awt.Color(75, 91, 100));
-        AddBut1.addMouseListener(new java.awt.event.MouseAdapter() {
+        PickBut.setBackground(new java.awt.Color(75, 91, 100));
+        PickBut.setText("Pick");
+        PickBut.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
+        PickBut.setkBackGroundColor(new java.awt.Color(255, 255, 255));
+        PickBut.setkBorderRadius(50);
+        PickBut.setkEndColor(new java.awt.Color(75, 91, 100));
+        PickBut.setkHoverEndColor(new java.awt.Color(22, 33, 62));
+        PickBut.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        PickBut.setkHoverStartColor(new java.awt.Color(22, 33, 62));
+        PickBut.setkSelectedColor(new java.awt.Color(75, 91, 100));
+        PickBut.setkStartColor(new java.awt.Color(75, 91, 100));
+        PickBut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddBut1MouseClicked(evt);
+                PickButMouseClicked(evt);
             }
         });
-        AddBut1.addActionListener(new java.awt.event.ActionListener() {
+        PickBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddBut1ActionPerformed(evt);
+                PickButActionPerformed(evt);
             }
         });
-        TicketsPanel.add(AddBut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, -1, -1));
+        TicketsPanel.add(PickBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, -1, -1));
 
-        EditBut1.setBackground(new java.awt.Color(75, 91, 100));
-        EditBut1.setText("EDIT");
-        EditBut1.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
-        EditBut1.setkBackGroundColor(new java.awt.Color(255, 255, 255));
-        EditBut1.setkBorderRadius(50);
-        EditBut1.setkEndColor(new java.awt.Color(75, 91, 100));
-        EditBut1.setkHoverEndColor(new java.awt.Color(22, 33, 62));
-        EditBut1.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        EditBut1.setkHoverStartColor(new java.awt.Color(22, 33, 62));
-        EditBut1.setkSelectedColor(new java.awt.Color(75, 91, 100));
-        EditBut1.setkStartColor(new java.awt.Color(75, 91, 100));
-        EditBut1.addActionListener(new java.awt.event.ActionListener() {
+        PassDeleteBut.setBackground(new java.awt.Color(75, 91, 100));
+        PassDeleteBut.setText("DELETE");
+        PassDeleteBut.setFont(new java.awt.Font("Samanata", 0, 18)); // NOI18N
+        PassDeleteBut.setkBackGroundColor(new java.awt.Color(255, 255, 255));
+        PassDeleteBut.setkBorderRadius(50);
+        PassDeleteBut.setkEndColor(new java.awt.Color(75, 91, 100));
+        PassDeleteBut.setkHoverEndColor(new java.awt.Color(22, 33, 62));
+        PassDeleteBut.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        PassDeleteBut.setkHoverStartColor(new java.awt.Color(22, 33, 62));
+        PassDeleteBut.setkSelectedColor(new java.awt.Color(75, 91, 100));
+        PassDeleteBut.setkStartColor(new java.awt.Color(75, 91, 100));
+        PassDeleteBut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EditBut1ActionPerformed(evt);
+                PassDeleteButActionPerformed(evt);
             }
         });
-        TicketsPanel.add(EditBut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
+        TicketsPanel.add(PassDeleteBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
 
-        FTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        FTable1.setModel(new javax.swing.table.DefaultTableModel(
+        PassTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        PassTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -407,37 +444,36 @@ public class Flights extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        FTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        PassTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FTable1MouseClicked(evt);
+                PassTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(FTable1);
+        jScrollPane2.setViewportView(PassTable);
 
-        TicketsPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 1030, 460));
+        TicketsPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 1030, 470));
 
-        FCode1.setBackground(new java.awt.Color(204, 204, 204));
-        FCode1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        FCode1.setForeground(new java.awt.Color(22, 33, 62));
-        FCode1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TicketsPanel.add(FCode1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, 200, 30));
+        PhoneNumber.setBackground(new java.awt.Color(204, 204, 204));
+        PhoneNumber.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        PhoneNumber.setForeground(new java.awt.Color(22, 33, 62));
+        PhoneNumber.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        TicketsPanel.add(PhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, 200, 30));
 
-        FCode2.setBackground(new java.awt.Color(204, 204, 204));
-        FCode2.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        FCode2.setForeground(new java.awt.Color(22, 33, 62));
-        FCode2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TicketsPanel.add(FCode2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 320, 30));
+        PassName.setBackground(new java.awt.Color(204, 204, 204));
+        PassName.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        PassName.setForeground(new java.awt.Color(22, 33, 62));
+        PassName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        TicketsPanel.add(PassName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 320, 30));
 
-        FSource1.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        FSource1.setForeground(new java.awt.Color(22, 33, 62));
-        FSource1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
-        TicketsPanel.add(FSource1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, -1, 30));
+        FlightCodeChoices.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        FlightCodeChoices.setForeground(new java.awt.Color(22, 33, 62));
+        TicketsPanel.add(FlightCodeChoices, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, 100, 30));
 
-        FCode3.setBackground(new java.awt.Color(204, 204, 204));
-        FCode3.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        FCode3.setForeground(new java.awt.Color(22, 33, 62));
-        FCode3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TicketsPanel.add(FCode3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 160, 30));
+        PassportNum.setBackground(new java.awt.Color(204, 204, 204));
+        PassportNum.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        PassportNum.setForeground(new java.awt.Color(22, 33, 62));
+        PassportNum.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        TicketsPanel.add(PassportNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 160, 30));
 
         OptionsPanels.addTab("tab1", TicketsPanel);
 
@@ -450,16 +486,18 @@ public class Flights extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DeleteButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButActionPerformed
-             if (selected.equals("")){
+             if (Flightselected.equals("")){
            JOptionPane.showMessageDialog(this, "Choose flight to delete ! ");
        }else {
                  try {
-            String sqlQuery = "delete from Flights where FCode=" + selected;
+            String sqlQuery = "delete from Flights where FCode=" + Flightselected;
             Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
             Statement rem = Con.createStatement();
             rem.executeUpdate(sqlQuery);
              JOptionPane.showMessageDialog(this, "Flight Deleted");
              DisplayFlights();
+             FlightsClear();
+             GetFlightsCodes();
                  } catch (Exception e) {
                       JOptionPane.showMessageDialog(this, e);
                  }
@@ -468,7 +506,7 @@ public class Flights extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteButActionPerformed
     
     private void AddButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButActionPerformed
-       if (MissingData()){
+       if (MissingFlightData()){
            JOptionPane.showMessageDialog(this, "Missing Data");
        }
        else {
@@ -485,7 +523,9 @@ public class Flights extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(this, "Flight Added");
                Con.close();
                DisplayFlights();
-               Clear();
+               FlightsClear();
+               GetFlightsCodes();
+
               
            } catch (Exception e) {
            }
@@ -493,7 +533,7 @@ public class Flights extends javax.swing.JFrame {
     }//GEN-LAST:event_AddButActionPerformed
 
     private void EditButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButActionPerformed
-         if (selected.equals("")){
+         if (Flightselected.equals("")){
            JOptionPane.showMessageDialog(this, "Choose flight to edit ! ");
        }else {
                  try {
@@ -510,6 +550,8 @@ public class Flights extends javax.swing.JFrame {
             int row = add.executeUpdate();
              JOptionPane.showMessageDialog(this, "Flight Edited");
              DisplayFlights();
+             FlightsClear();
+             GetFlightsCodes();
                  } catch (Exception e) {
                       JOptionPane.showMessageDialog(this, e);
                  }
@@ -524,7 +566,7 @@ public class Flights extends javax.swing.JFrame {
     private void FTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FTableMouseClicked
        DefaultTableModel model = (DefaultTableModel) FTable.getModel();
        int INDEX = FTable.getSelectedRow();
-       selected = model.getValueAt(INDEX, 0).toString();
+       Flightselected = model.getValueAt(INDEX, 0).toString();
        FCode.setText(model.getValueAt(INDEX, 0).toString());
        FSource.setSelectedItem(model.getValueAt(INDEX, 1).toString());
        FDestination.setSelectedItem(model.getValueAt(INDEX, 2).toString());
@@ -551,25 +593,85 @@ public class Flights extends javax.swing.JFrame {
             OptionsPanels.setSelectedIndex(1);
     }//GEN-LAST:event_TicketsMouseClicked
 
-    private void DeleteBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBut1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DeleteBut1ActionPerformed
+    private void EditPassButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditPassButActionPerformed
+         if (Passengerselected.equals("")){
+           JOptionPane.showMessageDialog(this, "Choose passenger to edit ! ");
+       }else {
+                 try {
+            String sqlQuery = "update Passengers set PName=?,PPassport=?,PPhoneNum=?,FCode=? where PID=" + Passengerselected;
+            Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
+            PreparedStatement add = Con.prepareStatement(sqlQuery);
+             add.setString(1, PassName.getText());
+               add.setInt(2, Integer.valueOf(PassportNum.getText()));
+              add.setInt(3, Integer.valueOf(PhoneNumber.getText()));
+          add.setString(4, FlightCodeChoices.getSelectedItem().toString());    
+            int row = add.executeUpdate();
+             JOptionPane.showMessageDialog(this, "Passenger Edited");
+             DisplayPassengers();
+             PassengersClear();
+                 } catch (Exception e) {
+                      JOptionPane.showMessageDialog(this, e);
+                 }
+           
+       }
+    }//GEN-LAST:event_EditPassButActionPerformed
 
-    private void AddBut1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBut1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddBut1MouseClicked
+    private void PickButMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PickButMouseClicked
+         if (MissingPassengerData()){
+           JOptionPane.showMessageDialog(this, "Missing Data");
+       }
+       else {
+           try {
+            String sqlQuery = "insert into Passengers(PName,PPassport,FCode,PPhoneNum) values(?,?,?,?)";
+            Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
+            PreparedStatement add = Con.prepareStatement(sqlQuery);
+            add.setString(1, PassName.getText());
+             add.setInt(2, Integer.valueOf(PassportNum.getText()));
+            add.setString(3, FlightCodeChoices.getSelectedItem().toString());
+             add.setInt(4, Integer.valueOf(PhoneNumber.getText()));
+              int row = add.executeUpdate();
+              JOptionPane.showMessageDialog(this, "Ticket Picked");
+               Con.close();
+               DisplayPassengers();
+               PassengersClear();
+              
+           } catch (Exception e) {
+           }
+       }
+    }//GEN-LAST:event_PickButMouseClicked
 
-    private void AddBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBut1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AddBut1ActionPerformed
+    private void PickButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PickButActionPerformed
+      
+    }//GEN-LAST:event_PickButActionPerformed
 
-    private void EditBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBut1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EditBut1ActionPerformed
+    private void PassDeleteButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassDeleteButActionPerformed
+          if (Passengerselected.equals("")){
+           JOptionPane.showMessageDialog(this, "Choose passenger to delete ! ");
+       }else {
+                 try {
+            String sqlQuery = "delete from Passengers where PID=" + Passengerselected;
+            Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
+            Statement rem = Con.createStatement();
+            rem.executeUpdate(sqlQuery);
+             JOptionPane.showMessageDialog(this, "Passenger Deleted");
+              DisplayPassengers();
+              PassengersClear();
+                 } catch (Exception e) {
+                      JOptionPane.showMessageDialog(this, e);
+                 }
+           
+       }
+    }//GEN-LAST:event_PassDeleteButActionPerformed
 
-    private void FTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FTable1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FTable1MouseClicked
+    private void PassTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PassTableMouseClicked
+        DefaultTableModel model = (DefaultTableModel) PassTable.getModel();
+       int INDEX = PassTable.getSelectedRow();
+       Passengerselected = model.getValueAt(INDEX, 0).toString();
+          PassName.setText(model.getValueAt(INDEX, 1).toString());
+           PassportNum.setText(model.getValueAt(INDEX, 2).toString());
+            PhoneNumber.setText(model.getValueAt(INDEX, 3).toString());
+       FSource.setSelectedItem(model.getValueAt(INDEX, 4).toString());
+    }//GEN-LAST:event_PassTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -608,27 +710,27 @@ public class Flights extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.k33ptoo.components.KButton AddBut;
-    private com.k33ptoo.components.KButton AddBut1;
     private com.k33ptoo.components.KButton DeleteBut;
-    private com.k33ptoo.components.KButton DeleteBut1;
     private com.k33ptoo.components.KButton EditBut;
-    private com.k33ptoo.components.KButton EditBut1;
+    private com.k33ptoo.components.KButton EditPassBut;
     private javax.swing.JTextField FCode;
-    private javax.swing.JTextField FCode1;
-    private javax.swing.JTextField FCode2;
-    private javax.swing.JTextField FCode3;
     private com.toedter.calendar.JDateChooser FDate;
     private javax.swing.JComboBox<String> FDestination;
     private javax.swing.JTextField FSeats;
     private javax.swing.JComboBox<String> FSource;
-    private javax.swing.JComboBox<String> FSource1;
     private javax.swing.JTable FTable;
-    private javax.swing.JTable FTable1;
+    private javax.swing.JComboBox<String> FlightCodeChoices;
     private javax.swing.JPanel FlightsPanel;
     private javax.swing.JPanel HeadPanel;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JPanel ManageFlights;
     private javax.swing.JTabbedPane OptionsPanels;
+    private com.k33ptoo.components.KButton PassDeleteBut;
+    private javax.swing.JTextField PassName;
+    private javax.swing.JTable PassTable;
+    private javax.swing.JTextField PassportNum;
+    private javax.swing.JTextField PhoneNumber;
+    private com.k33ptoo.components.KButton PickBut;
     private javax.swing.JPanel SidePanel;
     private javax.swing.JPanel Tickets;
     private javax.swing.JPanel TicketsPanel;
