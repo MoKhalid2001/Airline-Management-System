@@ -13,10 +13,10 @@ import javax.swing.JOptionPane;
  * @author mokhalid
  */
 public class LogIn extends javax.swing.JFrame {
-
-    /**
-     * Creates new form LogIn
-     */
+    
+    // Movable Form : 
+    int xPosition = 0 , yPosition = 0;
+    
     public LogIn() {
         initComponents();
     }
@@ -46,6 +46,16 @@ public class LogIn extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         kGradientPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -148,6 +158,15 @@ public class LogIn extends javax.swing.JFrame {
     private void ExitBut1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBut1MouseClicked
        System.exit(0);
     }//GEN-LAST:event_ExitBut1MouseClicked
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+       xPosition = evt.getX();
+       yPosition = evt.getY();
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        setLocation(evt.getXOnScreen() - xPosition, evt.getYOnScreen() -yPosition);
+    }//GEN-LAST:event_formMouseDragged
 
     /**
      * @param args the command line arguments

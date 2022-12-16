@@ -23,9 +23,8 @@ public class Flights extends javax.swing.JFrame {
     String Flightselected = "";
     String Passengerselected = "";
     
-    /** 
-     * Creates new form Flights
-     */
+    int xPosition = 0 , yPosition = 0;
+    
     public Flights() {
         initComponents();
         DisplayFlights();
@@ -147,6 +146,16 @@ public class Flights extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -672,6 +681,15 @@ public class Flights extends javax.swing.JFrame {
             PhoneNumber.setText(model.getValueAt(INDEX, 3).toString());
        FSource.setSelectedItem(model.getValueAt(INDEX, 4).toString());
     }//GEN-LAST:event_PassTableMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        xPosition = evt.getX();
+        yPosition = evt.getY();
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+         setLocation(evt.getXOnScreen() - xPosition, evt.getYOnScreen() -yPosition);
+    }//GEN-LAST:event_formMouseDragged
 
     /**
      * @param args the command line arguments
