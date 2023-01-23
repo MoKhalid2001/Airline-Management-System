@@ -16,6 +16,11 @@ import javax.swing.table.DefaultTableModel;
  * @author mokhalid
  */
 public class SystemMain extends javax.swing.JFrame {
+    Connection Con = null;
+    PreparedStatement pst = null;
+    ResultSet Rs,Rs1 = null;
+    Statement st,st1 = null;
+    
     
     String Flightselected = "";
     String Passengerselected = "";
@@ -72,15 +77,20 @@ public class SystemMain extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+     
      private void GetFlightsCodes(){
           try {
-            FlightsClass.FlightsCodes();
-            FlightCodeChoices.removeAllItems();
-             while(Common.Rs.next()){
-                String FlightCd = Common.Rs.getString("FCode");
+             Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
+             st = Con.createStatement();
+             Rs = st.executeQuery("select * from Flights");         
+             FlightCodeChoices.removeAllItems();
+             while(Rs.next()){
+                String FlightCd = Rs.getString("FCode");
+                System.out.println(FlightCd + " ");
                 // Check Seats before adding : 
-                if (FlightsClass.SeatsCheck(FlightCd))
-                    FlightCodeChoices.addItem(FlightCd);   
+                if (FlightsClass.SeatsCheck(FlightCd)){
+                     FlightCodeChoices.addItem(FlightCd);   
+                }   
             }
         } catch (Exception e) {
         }   
@@ -226,7 +236,7 @@ public class SystemMain extends javax.swing.JFrame {
         });
         HeadPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 8, -1, -1));
 
-        MainPanel.add(HeadPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 1050, 20));
+        MainPanel.add(HeadPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 1050, 60));
 
         FlightsPanel.setBackground(new java.awt.Color(27, 36, 48));
         FlightsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -616,6 +626,7 @@ public class SystemMain extends javax.swing.JFrame {
                DisplayFlights();
                DisplayPassengers();
                PassengersClear();
+               GetFlightsCodes();
            } catch (Exception e) {
            }
        }
@@ -633,9 +644,12 @@ public class SystemMain extends javax.swing.JFrame {
                       newPassenger = new PassengerClass(PassName.getText(), FlightCodeChoices.getSelectedItem().toString(),
                              PhoneNumber.getText(), PassportNum.getText());
            newPassenger.DeletePassenger(Passengerselected);
+            FlightsClass.UpdateSeats("delete",FlightCodeChoices.getSelectedItem().toString());
              JOptionPane.showMessageDialog(this, "Passenger Deleted");
-              DisplayPassengers();
-              PassengersClear();
+            DisplayFlights();
+               DisplayPassengers();
+               PassengersClear();
+               GetFlightsCodes();
                  } catch (Exception e) {
                       JOptionPane.showMessageDialog(this, e);
                  }

@@ -81,19 +81,13 @@ public class FlightsClass extends FlightAbstract{
             return true;
      }
     
-     public static void FlightsCodes(){
-          try {
-            Common.Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
-            Common.st = Common.Con.createStatement();
-            Common.Rs = Common.st.executeQuery("select * from Flights");         
-          } catch (Exception e) {
-        }   
-     }
-     
      public static void UpdateSeats(String UpdateType,String FlightCode){
             String sqlQuery =  "update Flights set FSeats = FSeats + 1 where FCode=" + FlightCode;
             if (UpdateType.equals("pick"))
                 sqlQuery = "update Flights set FSeats = FSeats -1 where FCode=" + FlightCode;
+            else if (UpdateType.equals("delete"))
+                sqlQuery = "update Flights set FSeats = FSeats +1 where FCode=" + FlightCode;
+
           try {       
             Common.Con = DriverManager.getConnection(Common.DBURL,Common.username,"");
             PreparedStatement add = Common.Con.prepareStatement(sqlQuery);
